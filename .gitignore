@@ -1,0 +1,14 @@
+# Credenciais locais da base de dados (nunca versionar)
+config/credentials.php
+
+# IDE
+.idea/
+
+# Node / Playwright
+node_modules/
+test-results/
+playwright-report/
+playwright/.cache/
+
+# Sistema
+.DS_Store

@@ -1,6 +1,14 @@
 <?php
 $pageTitle = 'Porto';
-require __DIR__ . '/includes/header.php';
+/** @var PDO $pdo */
+$pdo = require __DIR__ . '/../config/db.php';
+
+// Descrição deste destino vinda da BD
+$stmt = $pdo->prepare('SELECT descricao_pt, descricao_en FROM destinos WHERE nome = ?');
+$stmt->execute(['Porto']);
+$destino = $stmt->fetch();
+
+require __DIR__ . '/../includes/header.php';
 ?>
     <main class="container">
       <section class="hero">
@@ -9,9 +17,9 @@ require __DIR__ . '/includes/header.php';
             <p class="kicker">Porto</p>
             <h1 data-pt="Pontes, azulejos e rio Douro" data-en="Bridges, tiles and the Douro river">Pontes, azulejos e
               rio Douro</h1>
-            <p data-pt="O Porto é conhecido pelo seu centro histórico, pelas caves de vinho e por uma forte identidade urbana."
-              data-en="Porto is known for its historic center, wine cellars and a strong urban identity.">O Porto é
-              conhecido pelo seu centro histórico, pelas caves de vinho e por uma forte identidade urbana.</p>
+            <?php if ($destino): ?>
+              <p data-pt="<?= htmlspecialchars($destino['descricao_pt']) ?>" data-en="<?= htmlspecialchars($destino['descricao_en']) ?>"><?= htmlspecialchars($destino['descricao_pt']) ?></p>
+            <?php endif; ?>
             <p id="visitCount" class="notice"></p>
           </article>
           <article class="card">
@@ -52,12 +60,4 @@ require __DIR__ . '/includes/header.php';
 
       </div>
     </footer>
-    <div class="modal" id="imageModal">
-      <div class="modal-box"><img id="modalImage" src="" alt="Imagem ampliada">
-        <p id="modalCaption"></p>
-      </div>
-    </div>
-    <script src="js/script.js"></script>
-  </body>
-
-</html>
+<?php require __DIR__ . '/../includes/footer.php'; ?>

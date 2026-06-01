@@ -1,0 +1,12 @@
+{
+  "name": "trip-planner-e2e",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Testes end-to-end (Playwright) do site Descobrir Portugal",
+  "scripts": {
+    "test:e2e": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.60.0"
+  }
+}

@@ -123,43 +123,6 @@ function setupGalleryModal() {
   modal.addEventListener('click', () => modal.classList.remove('open'))
 }
 
-function setupFormSubmission() {
-  const button = document.getElementById('submitRequest')
-  const nameInput = document.getElementById('name')
-  const numberInput = document.getElementById('number')
-  const cityInput = document.getElementById('city')
-  const message = document.getElementById('formMessage')
-
-  if (!button || !nameInput || !numberInput || !cityInput || !message) return
-
-  button.addEventListener('click', () => {
-    const name = nameInput.value.trim()
-    const number = numberInput.value.trim()
-    const city = cityInput.value.trim()
-
-    if (!name || !number || !city) {
-      message.textContent = state.lang === 'pt'
-        ? 'Preencha o nome, o telemóvel e o destino.'
-        : 'Please fill in your name, phone number and destination.'
-      message.className = 'validation invalid'
-      return
-    }
-
-    if (!validatePhone(number)) {
-      message.textContent = state.lang === 'pt'
-        ? 'Número de telemóvel inválido.'
-        : 'Invalid phone number.'
-      message.className = 'validation invalid'
-      return
-    }
-
-    message.textContent = state.lang === 'pt'
-      ? `Pedido submetido com sucesso. Obrigado, ${name}. Iremos entrar em contacto consigo em breve sobre ${city}.`
-      : `Request submitted successfully. Thank you, ${name}. We will contact you soon about ${city}.`
-    message.className = 'validation valid'
-  })
-}
-
 document.addEventListener('DOMContentLoaded', () => {
   setupToggles()
   applyTheme(state.theme)
@@ -167,5 +130,4 @@ document.addEventListener('DOMContentLoaded', () => {
   setupVisits()
   setupNumberValidation()
   setupGalleryModal()
-  setupFormSubmission()
 })

@@ -1,6 +1,14 @@
 <?php
 $pageTitle = 'Lisboa';
-require __DIR__ . '/includes/header.php';
+/** @var PDO $pdo */
+$pdo = require __DIR__ . '/../config/db.php';
+
+// Descrição deste destino vem da BD
+$stmt = $pdo->prepare('SELECT descricao_pt, descricao_en FROM destinos WHERE nome = ?');
+$stmt->execute(['Lisboa']);
+$destino = $stmt->fetch();
+
+require __DIR__ . '/../includes/header.php';
 ?>
     <main class="container">
       <section class="hero">
@@ -9,9 +17,9 @@ require __DIR__ . '/includes/header.php';
             <p class="kicker">Lisboa</p>
             <h1 data-pt="Entre colinas, miradouros e tradição" data-en="Between hills, viewpoints and tradition">Entre
               colinas, miradouros e tradição</h1>
-            <p data-pt="Lisboa mistura monumentos históricos, zonas modernas e uma relação forte com o rio Tejo."
-              data-en="Lisbon combines historic monuments, modern areas and a strong relationship with the Tagus river.">
-              Lisboa mistura monumentos históricos, zonas modernas e uma relação forte com o rio Tejo.</p>
+            <?php if ($destino): ?>
+              <p data-pt="<?= htmlspecialchars($destino['descricao_pt']) ?>" data-en="<?= htmlspecialchars($destino['descricao_en']) ?>"><?= htmlspecialchars($destino['descricao_pt']) ?></p>
+            <?php endif; ?>
             <ul>
               <li data-pt="Belém e os seus monumentos" data-en="Belém and its monuments">Belém e os seus monumentos</li>
               <li data-pt="Alfama e os bairros antigos" data-en="Alfama and the old neighborhoods">Alfama e os bairros
@@ -54,12 +62,4 @@ require __DIR__ . '/includes/header.php';
           para a ver ampliada.</p>
       </div>
     </footer>
-    <div class="modal" id="imageModal">
-      <div class="modal-box"><img id="modalImage" src="" alt="Imagem ampliada">
-        <p id="modalCaption"></p>
-      </div>
-    </div>
-    <script src="js/script.js"></script>
-  </body>
-
-</html>
+<?php require __DIR__ . '/../includes/footer.php'; ?>
