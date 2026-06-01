@@ -1,8 +1,9 @@
 # Credenciais locais da base de dados (nunca versionar)
 config/credentials.php
 
-# IDE
+# IDE / ferramentas
 .idea/
+.junie/
 
 # Node / Playwright
 node_modules/
