@@ -101,7 +101,19 @@ Estratégia em três níveis (pirâmide de testes):
 |---|---|---|---|
 | Unitário + Integração (BD) | `public/tests.php` | abrir no browser <http://localhost:8000/tests.php> | a tabela mostra **8/8 testes passaram** (a verde) e cada linha em **PASS** |
 | Integração — HTTP (páginas + API) | `tests/tests.sh` | no terminal: `./tests/tests.sh` | termina com **Resultado: 16 passaram, 0 falharam** (e código de saída 0) |
-| End-to-end (browser) | `tests/e2e/*.spec.js` | no terminal: `npm install` e depois `npm run test:e2e` | o Playwright imprime **5 passed** (a verde) |
+| End-to-end (browser) | `tests/e2e/*.spec.js` | no terminal: `npm run test:e2e` (antes, uma vez: ver abaixo) | o Playwright imprime **5 passed** (a verde) |
+
+Antes dos testes end-to-end, uma vez por máquina:
+
+```bash
+npm install                       # descarrega as dependências do package-lock.json para node_modules/
+npx playwright install chromium   # descarrega o browser que o Playwright usa
+```
+
+A pasta `node_modules/` não vai no git: o `package.json` diz que pacotes são
+precisos e o `package-lock.json` fixa as versões exatas, e o `npm install`
+recria-a a partir daí. Os browsers não vêm no pacote do Playwright, por isso
+descarregam-se à parte. O servidor PHP tem de estar a correr.
 
 Notas sobre "como sei que passou":
 
