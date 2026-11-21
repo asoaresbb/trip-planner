@@ -15,14 +15,19 @@ Site sobre turismo em Portugal, desenvolvido para a unidade curricular de
 
 ## Instalação
 
-1. **Base de dados** — no MySQL Workbench (ligado como root), executar o script
-   [`database.sql`](database.sql). Ele cria a base de dados `trip_planner`, o
-   utilizador `lei`, as tabelas e os dados iniciais.
+1. **Palavra-passe** — escolher uma palavra-passe para o utilizador `lei` e
+   pô-la no [`database.sql`](database.sql), no lugar de `MUDAR_AQUI` (aparece
+   duas vezes).
 
-2. **Credenciais** — a ligação é configurada em `config/credentials.php`
-   (ignorado pelo git). A aplicação liga como o utilizador `lei`.
+2. **Base de dados** — no MySQL Workbench (ligado como root), executar o
+   `database.sql`. Ele cria a base de dados `trip_planner`, o utilizador `lei`,
+   as tabelas e os dados iniciais.
 
-3. **Arrancar o site** (o document root é a pasta `public/`):
+3. **Credenciais** — copiar `config/credentials.example.php` para
+   `config/credentials.php` (ignorado pelo git) e pôr lá a mesma palavra-passe.
+   A aplicação liga como o utilizador `lei`.
+
+4. **Arrancar o site** (o document root é a pasta `public/`):
 
    ```bash
    php -S localhost:8000 -t public
